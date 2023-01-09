@@ -56,18 +56,26 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
+              alignment: Alignment.topCenter,
               child: CustomPaint(
                 painter: MyPainter(),
               ),
             ),
-            FloatingActionButton.extended(
-              onPressed: _setAnswer,
-              tooltip: 'Start',
-              label: const Text('Start'),
-            ),
-            Text(
-              '$_answer',
-              style: Theme.of(context).textTheme.headline4,
+            Container(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                children: <Widget>[
+                  FloatingActionButton.extended(
+                    onPressed: _setAnswer,
+                    tooltip: 'Start',
+                    label: const Text('Start'),
+                  ),
+                  Text(
+                    '$_answer',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -88,21 +96,11 @@ class MyPainter extends CustomPainter {
     for (int i = 0; i < _answer; i++) {
       // 正円の描画
       p.style = PaintingStyle.fill;
-      p.color = Color.fromARGB(150, 0, 200, 255);
-      Offset ctr =
-          Offset(Random().nextDouble() * 100, Random().nextDouble() * 100);
+      p.color = Color.fromARGB(200, 0, 200, 255);
+      Offset ctr = Offset(
+          Random().nextDouble() * 200 - 100, Random().nextDouble() * 100 - 200);
       canvas.drawCircle(ctr, 15.0, p);
     }
-    // 楕円１の描画
-    p.style = PaintingStyle.stroke;
-    p.color = Color.fromARGB(150, 200, 0, 255);
-    p.strokeWidth = 10.0;
-    Rect r = Rect.fromLTWH(100.0, 50.0, 200.0, 150.0);
-    canvas.drawOval(r, p);
-
-    // 楕円２の描画
-    r = Rect.fromLTWH(50.0, 100.0, 150.0, 200.0);
-    canvas.drawOval(r, p);
   }
 
   @override
